@@ -85,6 +85,7 @@ std::filesystem::path get_user_runtime_dir() {
             return ret;
         }
     }
+    if(geteuid() == 0) return "/run";
     throw RuntimeError(M_("get_user_runtime_dir(): Cannot determine the user's runtime directory"));
 }
 

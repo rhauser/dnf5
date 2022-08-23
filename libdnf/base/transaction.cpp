@@ -28,6 +28,7 @@ along with libdnf.  If not, see <https://www.gnu.org/licenses/>.
 #include "utils/bgettext/bgettext-mark-domain.h"
 #include "utils/locker.hpp"
 #include "utils/string.hpp"
+#include "utils/xdg.hpp"
 
 #include "libdnf/base/base.hpp"
 #include "libdnf/common/exception.hpp"
@@ -331,7 +332,8 @@ Transaction::TransactionRunResult Transaction::Impl::run(
 
     // acquire the lock
     std::filesystem::path lock_file_path = config.installroot().get_value();
-    lock_file_path /= "run/dnf/rpmtransaction.lock";
+    lock_file_path /= utils::xdg::get_user_runtime_dir();
+    lock_file_path /= "rpmtransaction.lock";
     std::filesystem::create_directories(lock_file_path.parent_path());
 
     libdnf::utils::Locker locker(lock_file_path);
