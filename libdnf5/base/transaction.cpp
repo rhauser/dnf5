@@ -33,6 +33,7 @@ along with libdnf.  If not, see <https://www.gnu.org/licenses/>.
 #include "transaction_package_impl.hpp"
 #include "utils/locker.hpp"
 #include "utils/string.hpp"
+#include "utils/xdg.hpp"
 
 #include "libdnf5/base/base.hpp"
 #include "libdnf5/common/exception.hpp"
