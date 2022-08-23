@@ -36,6 +36,7 @@
 #include "transaction_module_impl.hpp"
 #include "transaction_package_impl.hpp"
 #include "utils/string.hpp"
+#include "utils/xdg.hpp"
 
 #include "libdnf5/base/active_transaction_info.hpp"
 #include "libdnf5/base/base.hpp"
