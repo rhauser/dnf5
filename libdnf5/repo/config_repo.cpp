@@ -88,6 +88,8 @@ class ConfigRepo::Impl {
     OptionChild<OptionBool> countme{main_config.get_countme_option()};
     OptionEnum failovermethod{"priority", {"priority", "roundrobin"}};
     OptionChild<OptionBool> build_cache{main_config.get_build_cache_option()};
+    OptionChild<OptionBool> build_cache{main_config.build_cache()};
+    OptionChild<OptionPath> prefix{main_config.prefix()};
 };
 
 ConfigRepo::Impl::Impl(Config & owner, ConfigMain & main_config, const std::string & id)
@@ -197,6 +199,7 @@ ConfigRepo::Impl::Impl(Config & owner, ConfigMain & main_config, const std::stri
     owner.opt_binds().add("user_agent", user_agent);
     owner.opt_binds().add("countme", countme);
     owner.opt_binds().add("build_cache", build_cache);
+    owner.opt_binds().add("prefix", prefix);
 }
 
 ConfigRepo::ConfigRepo(ConfigMain & main_config, const std::string & id) : p_impl(new Impl(*this, main_config, id)) {}
@@ -560,6 +563,12 @@ const OptionChild<OptionBool> & ConfigRepo::get_build_cache_option() const {
     return p_impl->build_cache;
 }
 
+OptionChild<OptionPath> & ConfigRepo::prefix() {
+    return p_impl->prefix;
+}
+const OptionChild<OptionPath> & ConfigRepo::prefix() const {
+    return p_impl->prefix;
+}
 
 std::string ConfigRepo::get_unique_id() const {
     std::string tmp;
