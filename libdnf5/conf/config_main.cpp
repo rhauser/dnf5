@@ -310,6 +310,8 @@ class ConfigMain::Impl {
     OptionBool deltarpm{false};
     OptionNumber<std::uint32_t> deltarpm_percentage{75};
     OptionBool skip_if_unavailable{false};
+    OptionPath prefix{""};
+    OptionPath dbpath{""};
 };
 
 ConfigMain::Impl::Impl(Config & owner) : owner(owner) {
@@ -484,6 +486,8 @@ ConfigMain::Impl::Impl(Config & owner) : owner(owner) {
     owner.opt_binds().add("deltarpm_percentage", deltarpm_percentage);
     owner.opt_binds().add("skip_if_unavailable", skip_if_unavailable);
     owner.opt_binds().add("optional_metadata_types", optional_metadata_types);
+    owner.opt_binds().add("prefix", prefix);
+    owner.opt_binds().add("dbpath", dbpath);
 }
 
 ConfigMain::ConfigMain() {
@@ -1421,6 +1425,20 @@ void ConfigMain::Impl::apply_gpgcheck_policy(
     if (policy == "all" && !localpkg_gpgcheck_explicit) {
         localpkg_gpgcheck.set(priority, gpgcheck_val);
     }
+}
+
+OptionPath & ConfigMain::prefix() {
+    return p_impl->prefix;
+}
+const OptionPath & ConfigMain::prefix() const {
+    return p_impl->prefix;
+}
+
+OptionPath & ConfigMain::dbpath() {
+    return p_impl->dbpath;
+}
+const OptionPath & ConfigMain::dbpath() const {
+    return p_impl->dbpath;
 }
 
 void ConfigMain::load_from_parser(
