@@ -346,7 +346,26 @@ void Transaction::erase(TransactionItem & item) {
     }
 }
 
-void Transaction::install_up_down(TransactionItem & item, libdnf5::transaction::TransactionItemAction action) {
+namespace {
+
+   std::vector<rpmRelocation_s> get_relocations(Header h, const std::string & reloc_prefix)
+   {
+        std::vector<rpmRelocation_s> relocations;
+        rpmtd_s prefixes;
+        if(!reloc_prefix.empty()) {
+            if(headerGet(h, RPMTAG_PREFIXES, &prefixes, HEADERGET_ALLOC)) {
+                while(const char *prefix = rpmtdNextString(&prefixes)) {
+                    relocations.emplace_back(strdup(prefix), strdup(reloc_prefix.c_str()));
+                }
+            }
+        }
+        relocations.emplace_back(nullptr, nullptr);
+        return relocations;
+   }
+
+}
+
+void Transaction::install_up_down(TransactionItem & item, libdnf::transaction::TransactionItemAction action) {
     std::string msg_action;
     bool upgrade{true};
     if (action == libdnf5::transaction::TransactionItemAction::UPGRADE) {
@@ -364,7 +383,10 @@ void Transaction::install_up_down(TransactionItem & item, libdnf5::transaction::
     auto * header = read_pkg_header(file_path);
     last_added_item = &item;
     last_item_added_ts_element = false;
-    auto rc = rpmtsAddInstallElement(ts, header, &item, upgrade ? 1 : 0, nullptr);
+
+    auto prefix = item.get_package().get_repo()->get_config().prefix().get_value();
+    auto relocations = get_relocations(header, prefix);
+    auto rc = rpmtsAddInstallElement(ts, header, &item, upgrade ? 1 : 0, relocations.size() > 1 ? &relocations[0] : nullptr );
     headerFree(header);
     if (rc != 0) {
         //TODO(jrohel): Why? Librpm does not provide this information.
