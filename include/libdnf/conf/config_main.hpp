@@ -276,6 +276,11 @@ public:
     OptionBool & skip_if_unavailable();
     const OptionBool & skip_if_unavailable() const;
 
+    OptionPath & prefix();
+    const OptionPath & prefix() const;
+    OptionPath & dbpath();
+    const OptionPath & dbpath() const;
+
     virtual void load_from_parser(
         const libdnf::ConfigParser & parser,
         const std::string & section,

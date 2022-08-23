@@ -132,6 +132,9 @@ public:
     OptionChild<OptionBool> & build_cache();
     const OptionChild<OptionBool> & build_cache() const;
 
+    OptionChild<OptionPath> & prefix();
+    const OptionChild<OptionPath> & prefix() const;
+
     // option recognized by other tools, e.g. gnome-software, but unused in dnf
     OptionString & enabled_metadata();
     const OptionString & enabled_metadata() const;

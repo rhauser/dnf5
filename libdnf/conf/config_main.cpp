@@ -351,6 +351,8 @@ class ConfigMain::Impl {
     OptionBool deltarpm{true};
     OptionNumber<std::uint32_t> deltarpm_percentage{75};
     OptionBool skip_if_unavailable{false};
+    OptionPath prefix{""};
+    OptionPath dbpath{""};
 };
 
 ConfigMain::Impl::Impl(Config & owner) : owner(owner) {
@@ -532,6 +534,8 @@ ConfigMain::Impl::Impl(Config & owner) : owner(owner) {
     owner.opt_binds().add("deltarpm", deltarpm);
     owner.opt_binds().add("deltarpm_percentage", deltarpm_percentage);
     owner.opt_binds().add("skip_if_unavailable", skip_if_unavailable);
+    owner.opt_binds().add("prefix", prefix);
+    owner.opt_binds().add("dbpath", dbpath);
 }
 
 ConfigMain::ConfigMain() {
@@ -1332,6 +1336,20 @@ OptionBool & ConfigMain::skip_if_unavailable() {
 }
 const OptionBool & ConfigMain::skip_if_unavailable() const {
     return p_impl->skip_if_unavailable;
+}
+
+OptionPath & ConfigMain::prefix() {
+    return p_impl->prefix;
+}
+const OptionPath & ConfigMain::prefix() const {
+    return p_impl->prefix;
+}
+
+OptionPath & ConfigMain::dbpath() {
+    return p_impl->dbpath;
+}
+const OptionPath & ConfigMain::dbpath() const {
+    return p_impl->dbpath;
 }
 
 void ConfigMain::load_from_parser(
