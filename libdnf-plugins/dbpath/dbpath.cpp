@@ -77,7 +77,7 @@ private:
 
 void DBPath::post_base_setup()
 {
-    auto dbpath = base.get_config().dbpath().get_value();
+    auto dbpath = base.get_vars()->substitute(base.get_config().dbpath().get_value());
     if(!dbpath.empty()) {
         rpmDefineMacro(nullptr, ("_dbpath " + dbpath).c_str(), 0);
     }
