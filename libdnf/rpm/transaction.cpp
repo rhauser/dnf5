@@ -345,7 +345,10 @@ void Transaction::install_up_down(TransactionItem & item, libdnf::transaction::T
     last_added_item = &item;
     last_item_added_ts_element = false;
 
-    auto prefix = item.get_package().get_repo()->get_config().prefix().get_value();
+    auto prefix = base->get_vars()->substitute(item.get_package().get_repo()->get_config().prefix().get_value());
+    if(!prefix.empty() && prefix[0] != '/') {
+        prefix = base->get_vars()->substitute(base->get_config().prefix().get_value() + '/' + prefix);
+    }
     auto relocations = get_relocations(header, prefix);
     auto rc = rpmtsAddInstallElement(ts, header, &item, upgrade ? 1 : 0, relocations.size() > 1 ? &relocations[0] : nullptr );
     headerFree(header);
