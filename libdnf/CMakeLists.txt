@@ -64,7 +64,7 @@ target_link_libraries(libdnf ${LIBSOLVEXT_LIBRARIES})
 
 pkg_check_modules(RPM REQUIRED rpm>=4.17.0)
 list(APPEND LIBDNF5_PC_REQUIRES "${RPM_MODULE_NAME}")
-target_link_libraries(libdnf ${RPM_LIBRARIES})
+target_link_libraries(libdnf ${RPM_LINK_LIBRARIES})
 
 if(WITH_COMPS)
     pkg_check_modules(LIBXML2 REQUIRED libxml-2.0)
