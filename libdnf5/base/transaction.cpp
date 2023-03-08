@@ -37,7 +37,6 @@
 #include "transaction_package_impl.hpp"
 #include "utils/on_scope_exit.hpp"
 #include "utils/string.hpp"
-#include "utils/xdg.hpp"
 
 #include "libdnf5/base/active_transaction_info.hpp"
 #include "libdnf5/base/base.hpp"
@@ -1097,8 +1096,11 @@ Transaction::TransactionRunResult Transaction::Impl::_run(
     info.set_start_time(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
 
     // acquire the lock
+
     std::filesystem::path lock_file_path = config.get_installroot_option().get_value();
-    lock_file_path /= std::filesystem::path(libdnf5::TRANSACTION_LOCK_FILEPATH).relative_path();
+    lock_file_path /= libdnf::xdg::get_user_runtime_dir();
+    lock_file_path /= "rpmtransaction.lock";
+
     std::filesystem::create_directories(lock_file_path.parent_path());
 
     auto logger = base->get_logger().get();
