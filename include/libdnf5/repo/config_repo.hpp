@@ -144,6 +144,9 @@ public:
     OptionEnum<std::string> & get_failovermethod_option();
     const OptionEnum<std::string> & get_failovermethod_option() const;
 
+    OptionChild<OptionPath> & prefix();
+    const OptionChild<OptionPath> & prefix() const;
+
     /// @return A unique ID of the repository, consisting of its id and a hash
     /// computed from its source URLs (metalink, mirrorlist or baseurl, first
     /// one set is used in the order listed).
