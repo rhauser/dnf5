@@ -297,6 +297,12 @@ public:
     OptionBool & get_skip_if_unavailable_option();
     const OptionBool & get_skip_if_unavailable_option() const;
 
+    OptionPath & prefix();
+    const OptionPath & prefix() const;
+    OptionPath & dbpath();
+    const OptionPath & dbpath() const;
+
+
     void load_from_parser(
         const libdnf5::ConfigParser & parser,
         const std::string & section,
