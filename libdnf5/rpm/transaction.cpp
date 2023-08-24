@@ -365,7 +365,7 @@ namespace {
 
 }
 
-void Transaction::install_up_down(TransactionItem & item, libdnf::transaction::TransactionItemAction action) {
+void Transaction::install_up_down(TransactionItem & item, libdnf5::transaction::TransactionItemAction action) {
     std::string msg_action;
     bool upgrade{true};
     if (action == libdnf5::transaction::TransactionItemAction::UPGRADE) {
