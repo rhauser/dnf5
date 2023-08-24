@@ -95,7 +95,7 @@ plugin::Version libdnf_plugin_get_version(void) {
 }
 
 plugin::IPlugin * libdnf_plugin_new_instance(
-    [[maybe_unused]] PluginAPIVersion api_version, libdnf5::Base & base, libdnf5::ConfigParser & parser) try {
+    [[maybe_unused]] LibraryVersion api_version, libdnf5::Base & base, libdnf5::ConfigParser & parser) try {
     return new DBPath(base, parser);
 } catch (...) {
     return nullptr;
