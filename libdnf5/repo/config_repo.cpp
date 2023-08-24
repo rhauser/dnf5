@@ -88,7 +88,6 @@ class ConfigRepo::Impl {
     OptionChild<OptionBool> countme{main_config.get_countme_option()};
     OptionEnum<std::string> failovermethod{"priority", {"priority", "roundrobin"}};
     OptionChild<OptionBool> build_cache{main_config.get_build_cache_option()};
-    OptionChild<OptionBool> build_cache{main_config.build_cache()};
     OptionChild<OptionPath> prefix{main_config.prefix()};
 };
 
