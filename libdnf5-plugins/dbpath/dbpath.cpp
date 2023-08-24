@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with libdnf.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "utils/bgettext/bgettext-mark-domain.h"
+#include "libdnf5/utils/bgettext/bgettext-mark-domain.h"
 
 #include <fmt/format.h>
 #include <libdnf/base/base.hpp>
@@ -35,7 +35,7 @@ along with libdnf.  If not, see <https://www.gnu.org/licenses/>.
 #include <utility>
 #include <vector>
 
-using namespace libdnf;
+using namespace libdnf5;
 
 namespace {
 
@@ -47,7 +47,7 @@ constexpr const char * attrs_value[]{"Reiner Hauser", "reiner.hauser@cern.ch", "
 
 class DBPath: public plugin::IPlugin {
 public:
-    DBPath(libdnf::Base & base, libdnf::ConfigParser &) : IPlugin(base) {}
+    DBPath(libdnf5::Base & base, libdnf5::ConfigParser &) : IPlugin(base) {}
     virtual ~DBPath() = default;
 
     PluginAPIVersion get_api_version() const noexcept override { return PLUGIN_API_VERSION; }
@@ -95,7 +95,7 @@ plugin::Version libdnf_plugin_get_version(void) {
 }
 
 plugin::IPlugin * libdnf_plugin_new_instance(
-    [[maybe_unused]] PluginAPIVersion api_version, libdnf::Base & base, libdnf::ConfigParser & parser) try {
+    [[maybe_unused]] PluginAPIVersion api_version, libdnf5::Base & base, libdnf5::ConfigParser & parser) try {
     return new DBPath(base, parser);
 } catch (...) {
     return nullptr;
