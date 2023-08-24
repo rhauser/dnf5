@@ -20,7 +20,7 @@ along with libdnf.  If not, see <https://www.gnu.org/licenses/>.
 #include "libdnf5/utils/bgettext/bgettext-mark-domain.h"
 
 #include <fmt/format.h>
-#include <libdnf/base/base.hpp>
+#include <libdnf5/base/base.hpp>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <rpm/rpmmacro.h>
