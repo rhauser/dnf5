@@ -33,6 +33,7 @@ target_link_libraries(dnf5 PRIVATE common libdnf5 libdnf5-cli Threads::Threads)
 install(TARGETS dnf5 RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 pkg_check_modules(RPM REQUIRED rpm>=4.17.0)
+target_link_libraries(dnf5 PRIVATE ${RPM_LINK_LIBRARIES})
 
 if(WITH_SYSTEMD)
   pkg_check_modules(SDBUS_CPP REQUIRED sdbus-c++)
