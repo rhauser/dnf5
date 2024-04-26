@@ -48,7 +48,7 @@ constexpr const char * attrs_value[]{"Reiner Hauser", "reiner.hauser@cern.ch", "
 
 class DBPath: public plugin::IPlugin {
 public:
-    DBPath(libdnf5::plugin::IPPluginData & data, libdnf5::ConfigParser &) : IPlugin(data) {}
+    DBPath(libdnf5::plugin::IPluginData & data, libdnf5::ConfigParser &) : IPlugin(data) {}
     virtual ~DBPath() = default;
 
     PluginAPIVersion get_api_version() const noexcept override { return PLUGIN_API_VERSION; }
