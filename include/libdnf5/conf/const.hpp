@@ -45,7 +45,7 @@ constexpr const char * REPOS_OVERRIDE_DIR = "/etc/dnf/repos.override.d";
 // Filename inherited from config-manager plugin which originally owned this file.
 constexpr const char * USER_REPOS_OVERRIDE_FILENAME = "99-config_manager.repo";
 
-constexpr const char * TRANSACTION_LOCK_FILEPATH = "/run/dnf/rpmtransaction.lock";
+constexpr const char * TRANSACTION_LOCK_FILEPATH = "/tmp/dnf/rpmtransaction.lock";
 constexpr const char * SYSTEM_REPO_LOCK_FILENAME = "system-repo.lock";
 
 // More important varsdirs must be on the end of vector
